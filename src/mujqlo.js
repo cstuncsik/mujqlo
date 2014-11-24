@@ -2,7 +2,11 @@ var mujqlo = (function(win, doc, undefined) {
     'use strict';
 
     var
-    // load method
+        /**
+         * Loads jquery files
+         * @param  {array}   files     Array of file urls
+         * @param  {Function} callback Runs after all jquery files loaded
+         */
         load = function(files, callback) {
 
         var // head html element
@@ -19,12 +23,14 @@ var mujqlo = (function(win, doc, undefined) {
                     callback();
                 }
             };
-        // loop through jquery fil urls
+        // loop through jquery file urls
         while (i--) {
             // pass actual file url to closure
             (function(item) {
                 var // create a script tag
                     script = doc.createElement('script'),
+                    // script ready state
+                    ready = script.readyState,
                     // file url
                     url = files[item],
                     // add jquery version to global namespace
@@ -37,25 +43,27 @@ var mujqlo = (function(win, doc, undefined) {
                 script.type = 'text/javascript';
                 script.src = url;
                 // check if the script is loaded
-                if (script.readyState) {
+                if (ready) { // IE
                     script.onreadystatechange = function() {
-                        if (script.readyState == "loaded" ||
-                            script.readyState == "complete") {
+                        ready = script.readyState.toLowerCase();
+                        if (ready === "loaded" || ready === "complete") {
                             script.onreadystatechange = null;
                             add();
                             checkAll();
                         }
                     };
-                } else {
+                } else { // others
                     script.onload = function() {
                         add();
                         checkAll();
                     };
                 }
+                // append script to head
                 head.appendChild(script);
             })(i);
         }
     };
+    // return public api
     return {
         load: load
     };
