@@ -1,13 +1,16 @@
 {
-  "name": "multi-jquery-loader",
+  "name": "mujqlo",
   "version": "0.0.1",
-  "description": "Load different versions of jquery with given namespace",
+  "description": "Loads different versions of jquery with given namespace to a page",
   "license": "WTFPL",
   "homepage": "https://github.com/Csombek/mujqlo",
-  "author": {
-    "name": "Csaba Tuncsik",
-    "email": "csaba.tuncsik@gmail.com"
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:Csombek/mujqlo.git"
   },
+  "authors": [
+    "Csaba Tuncsik <csaba.tuncsik@gmail.com>"
+  ],
   "main": "dist/mujqlo.js",
   "ignore": [
     "bower_components",
