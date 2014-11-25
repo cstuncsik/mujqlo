@@ -1,3 +1,5 @@
+[![Bower version](https://badge.fury.io/bo/mujqlo.svg)](http://badge.fury.io/bo/mujqlo)
+
 MujQLo
 ======
 
@@ -5,6 +7,13 @@ MujQLo
 
 Loads different versions of jquery based on its version number to a page
 
+## Install
+
+```sh
+$ bower install --save mujqlo
+```
+
+### `index.html`
 
 ```html
 <!doctype html>
@@ -23,13 +32,9 @@ Loads different versions of jquery based on its version number to a page
         'bower_components/jquery-1.11.1/dist/jquery.js',
         'bower_components/jquery-2.1.1/dist/jquery.js'
     ],function(){
-        console.log('start app or load jquery dependent stuff');
-        console.log('loaded jq:',jq172.fn.jquery);
-        console.log('loaded jq:',jq183.fn.jquery);
-        console.log('loaded jq:',jq191.fn.jquery);
-        console.log('loaded jq:',jq1102.fn.jquery);
-        console.log('loaded jq:',jq1111.fn.jquery);
-        console.log('loaded jq:',jq211.fn.jquery);
+        mujqlo.load([
+            'test/app.js'
+        ]);
     });
     </script>
 </head>
@@ -38,6 +43,41 @@ Loads different versions of jquery based on its version number to a page
 </body>
 
 </html>
+
+```
+
+### `app.js`
+
+```js
+(function($){
+    'use strict';
+    console.log($.fn.jquery);
+})(jq172);
+
+(function($){
+    'use strict';
+    console.log($.fn.jquery);
+})(jq183);
+
+(function($){
+    'use strict';
+    console.log($.fn.jquery);
+})(jq191);
+
+(function($){
+    'use strict';
+    console.log($.fn.jquery);
+})(jq1102);
+
+(function($){
+    'use strict';
+    console.log($.fn.jquery);
+})(jq1111);
+
+(function($){
+    'use strict';
+    console.log($.fn.jquery);
+})(jq211);
 ```
 
 Copyright © 2014 Csaba Tuncsik <csaba.tuncsik@gmail.com>
