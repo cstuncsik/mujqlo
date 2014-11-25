@@ -3,6 +3,9 @@ MujQLo
 
 **Multiple jQuery Loader**
 
+Loads different versions of jquery based on its version number to a page
+
+
 ```html
 <!doctype html>
 <html>
