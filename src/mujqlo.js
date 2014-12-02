@@ -11,43 +11,56 @@ var mujqlo = (function(win, doc, undefined) {
 
             var // head html element
                 head = doc.getElementsByTagName('head')[0],
+
                 // files length for the while cycle
                 i = files.length,
+
                 // files length for checking all versions loaded
                 len = i,
-                // how many jquery files loaded
+
+                // how many files loaded
                 loaded = 0,
+
                 // check if all files loaded and call callback
                 checkAll = function() {
                     if (loaded === len) {
                         loaded = 0;
-                        if(typeof callback === 'function'){
+                        if (typeof callback === 'function') {
                             callback();
                         }
                     }
                 };
+
             // loop through jquery file urls
             while (i--) {
+
                 // pass actual file url to closure
                 (function(item) {
+
                     var // create a script tag
                         script = doc.createElement('script'),
+
                         // script ready state
                         ready = script.readyState,
+
                         // file url
                         url = files[item],
+
                         // add jquery version to global namespace
                         // from the version string from jQuery.fn.version property
                         // replacing dots to nothing (eg: jq172)
                         add = function() {
                             loaded += 1;
+
                             // Add jQuery to global namespace
-                            if(typeof jQuery === 'function'){
+                            if (typeof jQuery === 'function') {
                                 win['jq' + jQuery.fn.jquery.replace(/\./g, '')] = jQuery.noConflict(true);
                             }
                         };
-                    script.type = 'text/javascript';
+
+                    script.async = 'async';
                     script.src = url;
+
                     // check if the script is loaded
                     if (ready) { // IE
                         script.onreadystatechange = function() {
@@ -58,17 +71,25 @@ var mujqlo = (function(win, doc, undefined) {
                                 checkAll();
                             }
                         };
-                    } else { // others
+                    }
+                    else { // others
                         script.onload = function() {
                             add();
                             checkAll();
                         };
                     }
+
+                    // Throw error if file not found
+                    script.onerror = function(error) {
+                        throw 'NetworkError: 404 Not Found - ' + error.target.src;
+                    };
+
                     // append script to head
                     head.appendChild(script);
                 })(i);
             }
     };
+
     // return public api
     return {
         load: load
