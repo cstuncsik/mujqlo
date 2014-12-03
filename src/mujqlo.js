@@ -12,19 +12,16 @@ var mujqlo = (function(win, doc, undefined) {
             var // head html element
                 head = doc.getElementsByTagName('head')[0],
 
-                // files length for the while cycle
-                i = files.length,
+                // files length for checking
+                len = files.length,
 
-                // files length for checking all versions loaded
-                len = i,
+                // how many files checked
+                checked = 0,
 
-                // how many files loaded
-                loaded = 0,
-
-                // check if all files loaded and call callback
+                // check if all files treated and call callback
                 checkAll = function() {
-                    if (loaded === len) {
-                        loaded = 0;
+                    if (checked === len) {
+                        checked = 0;
                         if (typeof callback === 'function') {
                             callback();
                         }
@@ -32,11 +29,9 @@ var mujqlo = (function(win, doc, undefined) {
                 };
 
             // loop through jquery file urls
-            while (i--) {
-
+            for (var i = 0; i < len; i+=1) {
                 // pass actual file url to closure
-                (function(item) {
-
+                (function(url) {
                     var // create a script tag
                         script = doc.createElement('script'),
 
@@ -44,44 +39,44 @@ var mujqlo = (function(win, doc, undefined) {
                         ready = script.readyState,
 
                         // file url
-                        url = files[item],
+                        src = files[url],
 
-                        // add jquery version to global namespace
+                        // If there is jQuery then add it's version to global namespace
                         // from the version string from jQuery.fn.version property
                         // replacing dots to nothing (eg: jq172)
                         add = function() {
-                            loaded += 1;
+                            checked += 1;
 
-                            // Add jQuery to global namespace
                             if (typeof jQuery === 'function') {
                                 win['jq' + jQuery.fn.jquery.replace(/\./g, '')] = jQuery.noConflict(true);
                             }
                         };
 
                     script.async = 'async';
-                    script.src = url;
+                    script.src = src;
 
                     // check if the script is loaded
                     if (ready) { // IE
                         script.onreadystatechange = function() {
                             ready = script.readyState.toLowerCase();
-                            if (ready === "loaded" || ready === "complete") {
+                            if (ready === 'loaded' || ready === 'complete') {
                                 script.onreadystatechange = null;
                                 add();
                                 checkAll();
                             }
                         };
-                    }
-                    else { // others
+                    } else { // others
                         script.onload = function() {
                             add();
                             checkAll();
                         };
                     }
 
-                    // Throw error if file not found
+                    // check for error
                     script.onerror = function(error) {
-                        throw 'NetworkError: 404 Not Found - ' + error.target.src;
+                        checked += 1;
+                        checkAll();
+                        throw new Error(error.target.src + ' failed');
                     };
 
                     // append script to head
