@@ -1,4 +1,5 @@
 var mujqlo = (function(win, doc, undefined) {
+
     'use strict';
 
     var
@@ -13,14 +14,14 @@ var mujqlo = (function(win, doc, undefined) {
                 head = doc.getElementsByTagName('head')[0],
 
                 // files length for checking
-                len = files.length,
+                all = files.length,
 
                 // how many files checked
                 checked = 0,
 
                 // check if all files treated and call callback
                 checkAll = function() {
-                    if (checked === len) {
+                    if (checked === all) {
                         checked = 0;
                         if (typeof callback === 'function') {
                             callback();
@@ -29,7 +30,8 @@ var mujqlo = (function(win, doc, undefined) {
                 };
 
             // loop through jquery file urls
-            for (var i = 0; i < len; i+=1) {
+            for (var i = 0; i < all; i+=1) {
+
                 // pass actual file url to closure
                 (function(url) {
                     var // create a script tag
@@ -89,4 +91,5 @@ var mujqlo = (function(win, doc, undefined) {
     return {
         load: load
     };
+
 })(window, document);
