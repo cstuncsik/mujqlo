@@ -10,8 +10,10 @@ Loads different versions of jquery based on its version number to a page
 ## Install
 
 ```sh
-$ bower install --save mujqlo
+bower install --save mujqlo
 ```
+
+## Sample
 
 ### `index.html`
 
@@ -33,7 +35,7 @@ $ bower install --save mujqlo
         'bower_components/jquery-2.1.1/dist/jquery.js'
     ],function(){
         mujqlo.load([
-            'test/app.js'
+            'app.js'
         ]);
     });
     </script>
@@ -43,7 +45,6 @@ $ bower install --save mujqlo
 </body>
 
 </html>
-
 ```
 
 ### `app.js`
@@ -79,6 +80,29 @@ $ bower install --save mujqlo
     console.log($.fn.jquery);
 })(jq211);
 ```
+
+## Run test
+
+```sh
+gulp
+```
+
+The default gulp task starts a static web server at localhost:3000 (port may vary)
+
+Just run specRunner.html at [http://localhost:3000/specRunner.html](http://localhost:3000/specRunner.html)
+
+## Build production
+
+```sh
+gulp build
+```
+
+The **build** gulp task compresses the source (*src/mujqlo.js*) to **dist/mujqlo.js** and also starts the static web server
+and you can run the test against the production at the same url.
+
+If the test page is open the browser refreshes itself after build (by [browser-sync](http://www.browsersync.io/)) if not you just need to hit refresh.
+
+## License
 
 Copyright © 2014 Csaba Tuncsik <csaba.tuncsik@gmail.com>
 
