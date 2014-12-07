@@ -1,4 +1,20 @@
-var mujqlo = (function(win, doc, undefined) {
+(function(root, factory) {
+
+    'use strict';
+
+    if (typeof define === 'function' && define.amd) {
+        // AMD. Register as an anonymous module.
+        define([], factory);
+    } else if (typeof exports === 'object') {
+        // Node. Does not work with strict CommonJS, but
+        // only CommonJS-like environments that support module.exports,
+        // like Node.
+        module.exports = factory();
+    } else {
+        // Browser globals (root is window)
+        root.mujqlo = factory();
+    }
+}(this, function() {
 
     'use strict';
 
@@ -11,7 +27,7 @@ var mujqlo = (function(win, doc, undefined) {
         load = function(files, callback) {
 
             var // head html element
-                head = doc.getElementsByTagName('head')[0],
+                head = document.getElementsByTagName('head')[0],
 
                 // files length for checking
                 all = files.length,
@@ -30,12 +46,12 @@ var mujqlo = (function(win, doc, undefined) {
                 };
 
             // loop through jquery file urls
-            for (var i = 0; i < all; i+=1) {
+            for (var i = 0; i < all; i += 1) {
 
                 // pass actual file url to closure
                 (function(url) {
                     var // create a script tag
-                        script = doc.createElement('script'),
+                        script = document.createElement('script'),
 
                         // script ready state
                         ready = script.readyState,
@@ -50,7 +66,7 @@ var mujqlo = (function(win, doc, undefined) {
                             checked += 1;
 
                             if (typeof jQuery === 'function') {
-                                win['jq' + jQuery.fn.jquery.replace(/\./g, '')] = jQuery.noConflict(true);
+                                window['jq' + jQuery.fn.jquery.replace(/\./g, '')] = jQuery.noConflict(true);
                             }
                         };
 
@@ -92,4 +108,4 @@ var mujqlo = (function(win, doc, undefined) {
         load: load
     };
 
-})(window, document);
+}));

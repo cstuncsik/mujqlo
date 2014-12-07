@@ -1,6 +1,6 @@
 {
   "name": "mujqlo",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "description": "Loads different versions of jquery based on its version number to a page",
   "license": "WTFPL",
   "homepage": "https://github.com/Csombek/mujqlo",
@@ -29,6 +29,7 @@
     "jquery-1.10.2": "jquery#1.10.2",
     "jquery-1.9.1": "jquery#1.9.1",
     "jquery-1.8.3": "jquery#1.8.3",
-    "jquery-1.7.2": "jquery#1.7.2"
+    "jquery-1.7.2": "jquery#1.7.2",
+    "jasmine": "2.1.3"
   }
 }
