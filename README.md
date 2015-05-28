@@ -84,6 +84,8 @@ bower install --save mujqlo
 ## Run test
 
 ```sh
+npm install
+bower install
 gulp
 ```
 
