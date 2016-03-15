@@ -20,9 +20,9 @@
 
     var
     /**
-     * Loads jquery files
+     * Loads javascript files
      * @param  {array}   files     Array of file urls
-     * @param  {Function} callback Runs after all jquery files loaded
+     * @param  {Function} callback Runs after all files loaded
      */
         load = function(files, callback) {
 
@@ -45,7 +45,7 @@
                     }
                 };
 
-            // loop through jquery file urls
+            // loop through file urls
             for (var i = 0; i < all; i += 1) {
 
                 // pass actual file url to closure
@@ -61,7 +61,7 @@
 
                         // If there is jQuery then add it's version to global namespace
                         // from the version string from jQuery.fn.version property
-                        // replacing dots to nothing (eg: jq172)
+                        // replacing dots with nothing (eg: jq172)
                         add = function() {
                             checked += 1;
 

@@ -27,7 +27,7 @@ _.extend(paths.src, {
 });
 
 _.extend(paths.dist, {
-    js: paths.dist.root,
+    js: paths.dist.root
 });
 
 gulp.task('clean', function() {
@@ -77,6 +77,7 @@ gulp.task('watch', function() {
 
 gulp.task('default', function() {
     runSequence('clean',[
+            'lint',
             'watch'
         ],
         'browser-sync');
@@ -85,7 +86,7 @@ gulp.task('default', function() {
 gulp.task('build', function() {
     runSequence('clean', [
             'lint',
-            'uglify',
+            'uglify'
         ],
         'browser-sync');
 });

@@ -1,6 +1,6 @@
 {
   "name": "mujqlo",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "description": "Loads different versions of jquery based on its version number to a page",
   "license": "WTFPL",
   "homepage": "https://github.com/cstuncsik/mujqlo",
