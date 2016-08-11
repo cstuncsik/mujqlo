@@ -1,4 +1,4 @@
-[![Bower version](https://badge.fury.io/bo/mujqlo.svg)](http://badge.fury.io/bo/mujqlo)
+[![Bower](https://img.shields.io/bower/v/mujqlo.svg?maxAge=2592000)]()
 
 MujQLo
 ======
